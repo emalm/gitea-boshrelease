@@ -1,0 +1,31 @@
+name: gitea
+
+instance_groups:
+- name: gitea
+  azs:
+  - z1
+  instances: 1
+  jobs:
+  - name: gitea
+    release: gitea
+  networks:
+  - name: default
+  stemcell: default
+  vm_type: minimal
+
+releases:
+- name: gitea
+  url: file:///Users/pivotal/workspace/gitea-boshrelease
+  version: create
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-1200000
+  max_in_flight: 1
+  serial: false
+  update_watch_time: 5000-1200000

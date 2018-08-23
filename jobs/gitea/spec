@@ -1,0 +1,10 @@
+---
+name: gitea
+
+templates: {}
+
+packages:
+- git
+- gitea
+
+properties: {}

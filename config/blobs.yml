@@ -1,0 +1,12 @@
+git/git-2.18.0.tar.gz:
+  size: 7498807
+  sha: a7687c34d308b0e3d566a7d083edaca5fa92f834
+gitea/LICENSE:
+  size: 1097
+  sha: e197893fec745eef17201e346f12b86ae50a32f0
+gitea/gitea-1.5.0-linux-amd64:
+  size: 60460160
+  sha: f9af96a1fe96c30ee13c448b7496b0fd059dc994
+gitea/gitea-1.5.0-linux-amd64.sha256:
+  size: 90
+  sha: 909381fec3537345e1e587a85e1360f05bee3f4d
