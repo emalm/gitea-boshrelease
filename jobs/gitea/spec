@@ -1,7 +1,10 @@
 ---
 name: gitea
 
-templates: {}
+templates:
+  bpm.yml.erb: config/bpm.yml
+  bpm-pre-start.erb: bin/bpm-pre-start
+  gitea.ini.erb: config/gitea.ini
 
 packages:
 - git

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+gitea_bin=/var/vcap/packages/gitea/gitea
+
+source_config_dir=/var/vcap/jobs/gitea/config
+target_config_dir=/var/vcap/store/gitea/config
+
+mkdir -p $target_config_dir
+
+export PATH=/var/vcap/packages/git/bin:$PATH
+
+if [[ -e $target_config_dir/INTERNAL_TOKEN ]]; then
+	echo "INTERNAL_TOKEN file exists; skipping generation"
+else
+	echo "Generating INTERNAL_TOKEN file"
+	$gitea_bin generate secret INTERNAL_TOKEN > $target_config_dir/INTERNAL_TOKEN
+fi
+
+if [[ -e $target_config_dir/LFS_JWT_SECRET ]]; then
+	echo "LFS_JWT_SECRET file exists; skipping generation"
+else
+	echo "Generating LFS_JWT_SECRET file"
+	$gitea_bin generate secret LFS_JWT_SECRET > $target_config_dir/LFS_JWT_SECRET
+fi
+
+if [[ -e $target_config_dir/SECRET_KEY ]]; then
+	echo "SECRET_KEY file exists; skipping generation"
+else
+	echo "Generating SECRET_KEY file"
+	$gitea_bin generate secret SECRET_KEY > $target_config_dir/SECRET_KEY
+fi
+
+cp $source_config_dir/gitea.ini $target_config_dir/gitea.ini
+
+sed \
+  -i \
+  -e "s/INTERNAL_TOKEN_PLACEHOLDER/$(cat $target_config_dir/INTERNAL_TOKEN)/" \
+  -e "s/LFS_JWT_SECRET_PLACEHOLDER/$(cat $target_config_dir/LFS_JWT_SECRET)/" \
+  -e "s/SECRET_KEY_PLACEHOLDER/$(cat $target_config_dir/SECRET_KEY)/" \
+  $target_config_dir/gitea.ini
+
+
+chown -R vcap:vcap $target_config_dir

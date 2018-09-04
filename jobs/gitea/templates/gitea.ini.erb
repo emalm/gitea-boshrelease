@@ -1,0 +1,64 @@
+APP_NAME = Gitea: Git with a cup of tea
+RUN_USER = vcap
+RUN_MODE = prod
+
+[security]
+INTERNAL_TOKEN = INTERNAL_TOKEN_PLACEHOLDER
+INSTALL_LOCK   = true
+SECRET_KEY     = SECRET_KEY_PLACEHOLDER
+
+[database]
+DB_TYPE  = sqlite3
+HOST     = 127.0.0.1:3306
+NAME     = gitea
+USER     = gitea
+PASSWD   = 
+SSL_MODE = disable
+PATH     = /var/vcap/store/gitea/data/gitea.db
+
+[repository]
+ROOT = /var/vcap/store/gitea/gitea-repositories
+
+[server]
+SSH_DOMAIN       = localhost
+DOMAIN           = localhost
+HTTP_PORT        = 3000
+ROOT_URL         = http://localhost:3000/
+DISABLE_SSH      = false
+SSH_PORT         = 22
+LFS_START_SERVER = true
+LFS_CONTENT_PATH = /var/vcap/store/gitea/data/lfs
+OFFLINE_MODE     = false
+LFS_JWT_SECRET   = LFS_JWT_SECRET_PLACEHOLDER
+
+[mailer]
+ENABLED = false
+
+[service]
+REGISTER_EMAIL_CONFIRM            = false
+ENABLE_NOTIFY_MAIL                = false
+DISABLE_REGISTRATION              = false
+ALLOW_ONLY_EXTERNAL_REGISTRATION  = false
+ENABLE_CAPTCHA                    = false
+REQUIRE_SIGNIN_VIEW               = false
+DEFAULT_KEEP_EMAIL_PRIVATE        = false
+DEFAULT_ALLOW_CREATE_ORGANIZATION = true
+DEFAULT_ENABLE_TIMETRACKING       = true
+NO_REPLY_ADDRESS                  = noreply.example.org
+
+[picture]
+DISABLE_GRAVATAR        = false
+ENABLE_FEDERATED_AVATAR = true
+
+[openid]
+ENABLE_OPENID_SIGNIN = true
+ENABLE_OPENID_SIGNUP = true
+
+[session]
+PROVIDER = file
+
+[log]
+MODE      = file
+LEVEL     = Info
+ROOT_PATH = /var/vcap/sys/log/gitea
+

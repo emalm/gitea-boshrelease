@@ -1,0 +1,18 @@
+---
+processes:
+- name: gitea
+  persistent_disk: true
+
+  hooks:
+    pre_start: /var/vcap/jobs/gitea/bin/bpm-pre-start
+
+  env:
+    GITEA_WORK_DIR: "/var/vcap/store/gitea"
+    HOME: "/var/vcap/store/gitea"
+    PATH: "/var/vcap/packages/git/bin:/usr/local/bin:/usr/bin:/bin"
+    USER: "vcap"
+  executable: /var/vcap/packages/gitea/gitea
+  args:
+  - "web"
+  - "-c"
+  - "/var/vcap/store/gitea/config/gitea.ini"

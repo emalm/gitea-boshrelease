@@ -6,14 +6,19 @@ instance_groups:
   - z1
   instances: 1
   jobs:
+  - name: bpm
+    release: bpm
   - name: gitea
     release: gitea
   networks:
   - name: default
+  persistent_disk_type: 10GB
   stemcell: default
   vm_type: minimal
 
 releases:
+- name: bpm
+  version: latest
 - name: gitea
   url: file:///Users/pivotal/workspace/gitea-boshrelease
   version: create
